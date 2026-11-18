@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: silver_events
+    columns:
+      - name: event_id
+  - name: silver_users
+    columns:
+      - name: user_id
+  - name: gold_users
+    columns:
+      - name: user_id
+  - name: gold_user_daily_events
+    columns:
+      - name: user_id
+  - name: dm_events_users
+    columns:
+      - name: event_id
+  - name: dm_top_spenders_daily
+    columns:
+      - name: user_id
+  - name: stg_users
+    description: Latest cleaned record per user, without sensitive fields.
+    columns:
+      - name: user_id
+        data_tests:
+          - unique
+          - not_null
+  - name: mart_users
+    description: Consumer-facing users table.
+    columns:
+      - name: user_id
+        data_tests:
+          - unique
+          - not_null

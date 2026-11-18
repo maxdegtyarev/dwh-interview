@@ -1,0 +1,17 @@
+[project]
+name = "data-warehouse-issues"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "dbt-bigquery>=1.12.2",
+    "dbt-core>=1.12.6",
+]
+
+[project.scripts]
+data-warehouse-issues = "data_warehouse_issues:main"
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
