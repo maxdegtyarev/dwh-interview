@@ -18,7 +18,7 @@ with recent_events as (
 purchases as (
     select
         user_id,
-        sum(cast(json_extract_scalar(event_attributes, '$.price') as float64)) as total_spend,
+        sum(safe_cast(safe.json_extract_scalar(event_attributes, '$.price') as float64)) as total_spend,
         max(ingestion_timestamp) as last_purchase_at
     from recent_events
     where event_type = 'purchase'
@@ -28,7 +28,7 @@ purchases as (
 item_views as (
     select
         e.user_id,
-        count(distinct json_extract_scalar(e.event_attributes, '$.item_id')) as distinct_items_viewed
+        count(distinct safe.json_extract_scalar(e.event_attributes, '$.item_id')) as distinct_items_viewed
     from recent_events as e
     join purchases as p
         on e.user_id = p.user_id
