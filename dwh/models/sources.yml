@@ -1,0 +1,32 @@
+version: 2
+
+sources:
+  - name: raw
+    description: Tables loaded by the Airflow `ingest_events` DAG.
+    schema: raw
+    tables:
+      - name: events
+        description: Raw events from the events API. Append-only, at-least-once.
+        config:
+          loaded_at_field: ingestion_timestamp
+        columns:
+          - name: event_id
+          - name: user_id
+          - name: event_type
+          - name: event_attributes
+            description: JSON string.
+          - name: ingestion_timestamp
+            description: Set by Airflow at load time.
+      - name: users
+        description: Raw users from the events API.
+        config:
+          loaded_at_field: ingestion_timestamp
+        columns:
+          - name: user_id
+          - name: email
+          - name: name
+          - name: surname
+          - name: registration_date
+          - name: ip
+          - name: passport_number
+          - name: ingestion_timestamp
